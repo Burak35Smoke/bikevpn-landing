@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* src/app/globals.css dosyasının sonuna ekle */
+
+body {
+  /* Varsayılan metin rengini beyaz yapalım, 
+     gradient üzerinde okunurluk için iyi olur. */
+  /* color: white; */ 
+  /* Tailwind'in text-white'ı zaten kullanıyoruz, bu satır opsiyonel. */
+}
+/* src/app/globals.css */
+
+/* ... (body ve diğer stiller burada olabilir) ... */
+
+/* src/app/globals.css */
+
+/* ... (body ve diğer stiller burada olabilir) ... */
+
+.bikevpn-gradient-bg {
+  /* Çok koyu bir baz renk, neredeyse siyah */
+  background-color: #060710;
+
+  background-image:
+    /* 1. SABİT ÜST TURUNCU GRADYAN (EN ÜST KATMAN) */
+    linear-gradient(to bottom, hsla(30, 100%, 50%, 0.1) 0%, hsla(30, 100%, 50%, 0.121) 20%, transparent 40%),
+    /* hsla(30, 100%, 50%, ALPHA) -> BikeVPN turuncusu (ALPHA ile oynayarak görünürlüğünü ayarla)
+       0.1 alpha ile başlar, 20% yüksekliğe kadar 0.05 alpha'ya düşer, 40% yükseklikte tamamen şeffaflaşır.
+       Bu değerlerle oynayarak istediğin "belli belirsiz" etkiyi yakalayabilirsin.
+    */
+
+    /* 2. Hareketli Çok Renkli Radyal Gradyanlar (önceki gibi) */
+    radial-gradient(ellipse at 15% 20%, hsla(280, 70%, 50%, 0.35) 0px, transparent 50%),
+    radial-gradient(ellipse at 85% 30%, hsla(220, 75%, 55%, 0.4) 0px, transparent 55%),
+    radial-gradient(ellipse at 20% 85%, hsla(320, 65%, 52%, 0.3) 0px, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, hsla(30, 80%, 50%, 0.15) 0px, transparent 65%), /* Bu da turuncu bir dokunuştu, belki bunu kaldırabilir veya değiştirebilirsin */
+    radial-gradient(ellipse at 35% 50%, hsla(190, 60%, 50%, 0.2) 0px, transparent 60%),
+    radial-gradient(ellipse at 65% 55%, hsla(340, 60%, 45%, 0.25) 0px, transparent 58%),
+    radial-gradient(ellipse at 50% 50%, hsla(250, 50%, 15%, 0.5) 0px, #060710 70%),
+    
+    
+    linear-gradient(to top, hsla(30, 100%, 50%, 0.1) 0%, hsla(30, 100%, 50%, 0.043) 20%, transparent 20%);
+
+  /* Her bir arka plan katmanı için ayrı boyutlandırma ve konumlandırma */
+  background-size:
+    100% 15%,     /* 1. Sabit Turuncu: Genişlik %100, yükseklik gradientin yayılımına göre auto */
+    400% 400%,     /* 2. Hareketli Gradyanlar (diğer 7 katman için aynı) */
+    400% 400%,
+    400% 400%,
+    400% 400%,
+    400% 400%,
+    400% 400%,
+    400% 400%,
+    100% -1%;     /* 1. Sabit Turuncu: Genişlik %100, yükseklik gradientin yayılımına göre auto */
+
+  background-repeat: no-repeat; /* Tüm katmanlar için (özellikle üstteki linear gradient için önemli) */
+
+  /* Animasyon hala sadece background-position'ı değiştirecek.
+     background-position için de her katmana ayrı değerler vereceğiz.
+     İlk katman (turuncu) sabit kalacak.
+  */
+  animation: softGradientFlow 50s ease-in-out infinite alternate;
+}
+
+/* ----- KEYFRAMES ----- */
+/* Keyframes'de background-position'ın 8 katman için de tanımlanması gerekiyor.
+   İlk katmanın pozisyonu (turuncu) hep sabit kalacak (0 0).
+   Diğer 7 katmanın pozisyonu animasyonla değişecek.
+*/
+@keyframes softGradientFlow {
+  0% {
+    background-position:
+      0 0, /* Sabit Turuncu */
+      0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%; /* Hareketli katmanların başlangıç pozisyonları */
+  }
+  25% {
+    background-position:
+      0 0, /* Sabit Turuncu */
+      100% 25%, 100% 25%, 100% 25%, 100% 25%, 100% 25%, 100% 25%, 100% 25%;
+  }
+  50% {
+    background-position:
+      0 0, /* Sabit Turuncu */
+      75% 100%, 75% 100%, 75% 100%, 75% 100%, 75% 100%, 75% 100%, 75% 100%;
+  }
+  75% {
+    background-position:
+      0 0, /* Sabit Turuncu */
+      25% 0%, 25% 0%, 25% 0%, 25% 0%, 25% 0%, 25% 0%, 25% 0%;
+  }
+  100% {
+    background-position:
+      0 0, /* Sabit Turuncu */
+      0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%; /* Hareketli katmanların bitiş pozisyonları */
+  }
+}
+
+/* src/app/globals.css dosyasının sonuna ekle */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
