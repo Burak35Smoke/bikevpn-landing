@@ -49,7 +49,7 @@ export default function HomePage() {
         setFeedbackMessage(result.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
         setFeedbackType('error');
       }
-    } catch (error) {
+    } catch (_error) {
       setFeedbackMessage('Ağ hatası. Lütfen internet bağlantınızı kontrol edin.');
       setFeedbackType('error');
     } finally {
